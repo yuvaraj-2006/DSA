@@ -2,24 +2,18 @@ class Solution {
     public int countSubstrings(String s) {
         int count=0;
         for(int i=0;i<s.length();i++){
-            for(int j=i;j<s.length();j++){
-                if(check(s.substring(i,j+1))){
-                    count++;
-                }
-            }
+          count+=check(s,i,i);
+          count+=check(s,i,i+1);
         }
         return count;
     }
-    public boolean check(String s){
-        int l=0;
-        int r=s.length()-1;
-        while(l<r){
-            if(s.charAt(l)!=s.charAt(r)){
-                return false;
-            }
-            l++;
-            r--;
+    public int check(String s,int l,int r){
+        int count=0;
+        while(l>=0 && r < s.length() && s.charAt(l)==s.charAt(r)){
+            count++;
+            l--;
+            r++;
         }
-        return true;
+        return count;
     }
 }
